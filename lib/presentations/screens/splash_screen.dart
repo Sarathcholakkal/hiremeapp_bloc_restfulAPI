@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hireme_app/home_screen.dart';
+import 'package:hireme_app/presentations/screens/home_screen.dart';
 import 'package:hireme_app/utils/screen_size.dart';
 
 class SplashScreen extends StatefulWidget {
