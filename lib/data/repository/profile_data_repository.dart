@@ -10,13 +10,8 @@ class ProfileRepository {
 
   Future<Profile> getProfile() async {
     try {
-      final rawProfileData = await profileDataProvider.getProfileData();
-
-      final formmodeldata = Profile.fromJson(rawProfileData);
-
-      print("data form :profile:$formmodeldata");
-
-      return Profile.fromJson(rawProfileData);
+      final rawProfileData = await profileDataProvider.gerProfielData();
+      return profileFromJson(rawProfileData);
     } catch (e) {
       throw 'Failed to fetch profile: $e';
     }

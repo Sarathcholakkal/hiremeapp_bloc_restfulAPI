@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hireme_app/data/data_provider/profile_data_provider.dart';
 import 'package:hireme_app/data/repository/profile_data_repository.dart';
 import 'package:hireme_app/presentations/screens/home_screen.dart';
@@ -23,22 +22,24 @@ class _SplashScreenState extends State<SplashScreen> {
       // insertData();
       // getProfileData();
 
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HomeScreen()),
-      // );
-      apicall();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+      // apicall();
     });
     super.initState();
   }
 
   void apicall() async {
-    final data = await ProfileDataProvider().getProfileData();
-    print("the received data is at apicall funciton: $data");
+    final dataformdataprovider = await ProfileDataProvider().gerProfielData();
+    print("the received data is at apicall funciton: $dataformdataprovider");
     final repodata = await ProfileRepository(
       ProfileDataProvider(),
     ).getProfile();
+
     print("the profile data:$repodata");
+    print(repodata.toString());
   }
 
   @override

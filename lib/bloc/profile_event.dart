@@ -8,3 +8,9 @@ final class ProfileFetched extends ProfileEvent {
 
   // ProfileFetched({required this.userId});
 }
+
+final class ProfilePostEvent extends ProfileEvent {
+  final Profile userprofile;
+
+  ProfilePostEvent({required this.userprofile});
+}

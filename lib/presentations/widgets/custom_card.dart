@@ -54,7 +54,7 @@ class CustomCard extends StatelessWidget {
             ),
 
             Text(
-              'Data analists',
+              profileData.data.profession,
               style: TextStyle(
                 fontWeight: FontWeight.normal,
                 fontSize: 16,
@@ -67,7 +67,7 @@ class CustomCard extends StatelessWidget {
               height: SizeConfig.screenHeight * .12,
               // color: Colors.red,
               child: AutoSizeText(
-                'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+                profileData.data.profileDescription,
                 maxLines: 4,
                 minFontSize: 14,
                 maxFontSize: 18,
@@ -92,7 +92,7 @@ class CustomCard extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: 'MBA',
+                              text: profileData.data.qualification,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -111,7 +111,7 @@ class CustomCard extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: '1.2 year',
+                              text: profileData.data.experience,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,

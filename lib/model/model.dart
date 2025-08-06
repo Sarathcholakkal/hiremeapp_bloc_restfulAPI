@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final profile = profileFromJson(jsonString);
-
 import 'dart:convert';
 
 Profile profileFromJson(String str) => Profile.fromJson(json.decode(str));
@@ -26,6 +22,11 @@ class Profile {
     "name": name,
     "data": data.toJson(),
   };
+
+  @override
+  String toString() {
+    return 'Profile(id: $id, name: $name, data: $data)';
+  }
 }
 
 class Data {
@@ -54,4 +55,9 @@ class Data {
     "Qualification": qualification,
     "Experience": experience,
   };
+
+  @override
+  String toString() {
+    return 'Data(profession: $profession, profileDescription: $profileDescription, qualification: $qualification, experience: $experience)';
+  }
 }

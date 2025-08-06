@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hireme_app/data/repository/profile_data_repository.dart';
@@ -9,14 +11,24 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profilerepository;
   ProfileBloc(this.profilerepository) : super(ProfileInitial()) {
-    on<ProfileEvent>((event, emit) async {
+    on<ProfileFetched>((event, emit) async {
       emit(ProfileLoading());
+
       try {
+        print('try started to executes');
         final profileData = await profilerepository.getProfile();
+        log(profileData.toString());
         emit(ProfileSuccess(profile: profileData));
       } catch (e) {
         emit(ProfileFauilure(error: e.toString()));
       }
     });
+    on<ProfilePostEvent>((event, emti) async {
+      post(userprofile: event.userprofile);
+    });
   }
+
+  //................
 }
+
+post({required Profile userprofile}) {}
