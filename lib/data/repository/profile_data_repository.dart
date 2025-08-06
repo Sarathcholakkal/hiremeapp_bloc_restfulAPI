@@ -29,4 +29,16 @@ class ProfileRepository {
       throw Exception("Failed to insert profile data");
     }
   }
+
+  // profile_repository.dart
+  Future<void> deleteData(String id) async {
+    final response = await http.delete(
+      Uri.parse("https://api.restful-api.dev/objects/$id"),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete profile');
+    }
+  }
 }

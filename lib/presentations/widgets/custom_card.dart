@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/screens/update_entry.dart';
 import 'package:hireme_app/utils/const.dart';
@@ -49,7 +51,38 @@ class CustomCard extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx1) {
+                        return AlertDialog(
+                          title: const Text(
+                            'Are you sure you want to delete this profile?',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(ctx1).pop();
+                              },
+                              child: const Text('Close'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.read<ProfileBloc>().add(
+                                  ProfileDeleteEvent(id: profileData.id),
+                                );
+                                Navigator.of(ctx1).pop(); // Close the dialog
+                              },
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: Icon(Icons.delete),
+                ),
               ],
             ),
 

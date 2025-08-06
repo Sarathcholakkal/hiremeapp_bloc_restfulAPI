@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/widgets/text_field_title.dart';
 import 'package:hireme_app/utils/const.dart';
 import 'package:hireme_app/utils/text_validator.dart';
@@ -13,10 +16,9 @@ class AddNewEntry extends StatefulWidget {
 class _AddNewEntryState extends State<AddNewEntry> {
   final _nameContorller = TextEditingController();
   final _professionController = TextEditingController();
-
+  final _descriptionController = TextEditingController();
   final _qualificationController = TextEditingController();
   final _experienceController = TextEditingController();
-
   final GlobalKey<FormState> _signInKey = GlobalKey();
 
   // ! help to clear text field
@@ -30,15 +32,29 @@ class _AddNewEntryState extends State<AddNewEntry> {
   }
   // ! onsubmitted fun for create instace of student using  input field
 
-  // Future<void> onSubmit(BuildContext ctx) async {
-  //   print('one submitte pressed');
-  //   final name = _nameContorller.text.trim();
-  //   final emialID = _emalilController.text.trim();
-  //   final subject = _subjectController.text.trim();
-  //   final number = _numberController.text.trim();
-  //   final cgpa = _professionController.text.trim();
+  Future<void> onSubmit(BuildContext ctx) async {
+    print('one submitte pressed');
+    final name = _nameContorller.text.trim();
+    final profession = _professionController.text.trim();
+    final descriptions = _descriptionController.text.trim();
+    final qulification = _qualificationController.text.trim();
+    final experinece = _experienceController.text.trim();
 
-  // }
+    final userprofile = Profile(
+      name: name,
+      data: Data(
+        profession: profession,
+        profileDescription: descriptions,
+        qualification: qulification,
+        experience: experinece,
+      ),
+    );
+
+    // context.read<ProfileBloc>().add(ProfilePostEvent(userprofile: userprofile));
+
+    log('profile updated');
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +86,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.text,
-                            controller: _professionController,
+                            controller: _nameContorller,
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Name',
                             ),

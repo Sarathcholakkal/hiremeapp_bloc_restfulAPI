@@ -14,3 +14,9 @@ final class ProfilePostEvent extends ProfileEvent {
 
   ProfilePostEvent({required this.userprofile});
 }
+
+final class ProfileDeleteEvent extends ProfileEvent {
+  final String id;
+
+  ProfileDeleteEvent({required this.id});
+}

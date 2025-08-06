@@ -34,6 +34,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileFauilure(error: e.toString()));
       }
     });
+    //==============
+    on<ProfileDeleteEvent>((event, emit) async {
+      emit(ProfileLoading());
+      try {
+        await profilerepository.deleteData(event.id);
+        emit(
+          ProfileInitial(),
+        ); // Or a ProfileDeleted state, if you want to show confirmation
+      } catch (e) {
+        emit(ProfileFauilure(error: e.toString()));
+      }
+    });
   }
 }
 

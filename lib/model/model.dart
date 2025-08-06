@@ -5,11 +5,11 @@ Profile profileFromJson(String str) => Profile.fromJson(json.decode(str));
 String profileToJson(Profile data) => json.encode(data.toJson());
 
 class Profile {
-  String id;
+  String? id;
   String name;
   Data data;
 
-  Profile({required this.id, required this.name, required this.data});
+  Profile({this.id, required this.name, required this.data});
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
     id: json["id"],

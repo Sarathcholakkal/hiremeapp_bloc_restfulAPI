@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hireme_app/bloc/profile_bloc.dart';
@@ -73,7 +75,7 @@ class _UpdateEntryState extends State<UpdateEntry> {
 
     context.read<ProfileBloc>().add(ProfilePostEvent(userprofile: userprofile));
 
-    print('student updated');
+    log('profile updated');
     Navigator.of(context).pop();
   }
 
