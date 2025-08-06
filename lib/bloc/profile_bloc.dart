@@ -23,10 +23,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileFauilure(error: e.toString()));
       }
     });
-    on<ProfilePostEvent>((event, emti) async {
-      post(userprofile: event.userprofile);
+    on<ProfilePostEvent>((event, emit) async {
+      emit(ProfileLoading());
+      try {
+        await profilerepository.updateData(event.userprofile);
+        emit(
+          ProfileSuccess(profile: event.userprofile),
+        ); // You can customize this
+      } catch (e) {
+        emit(ProfileFauilure(error: e.toString()));
+      }
     });
   }
 }
 
 post({required Profile userprofile}) {}
+
+
+
+  // post(userprofile: event.userprofile);
