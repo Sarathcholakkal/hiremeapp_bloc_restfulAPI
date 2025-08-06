@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/screens/update_entry.dart';
 import 'package:hireme_app/utils/const.dart';
 import 'package:hireme_app/utils/screen_size.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+  final Profile profileData;
+  const CustomCard({super.key, required this.profileData});
 
   Color _generateLightRandomColor() {
     final Random random = Random();
@@ -39,7 +41,7 @@ class CustomCard extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  'Jeslin James',
+                  profileData.name,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,

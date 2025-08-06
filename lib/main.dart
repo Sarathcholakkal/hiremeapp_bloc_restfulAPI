@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hireme_app/presentations/screens/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/bloc/profile_bloc.dart';
+import 'package:hireme_app/data/data_provider/profile_data_provider.dart';
+import 'package:hireme_app/data/repository/profile_data_repository.dart';
 import 'package:hireme_app/presentations/screens/splash_screen.dart';
 
 void main() {
@@ -11,15 +14,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      color: Colors.white,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(color: Colors.white),
-      ),
+    return RepositoryProvider(
+      create: (context) => ProfileRepository(ProfileDataProvider()),
+      child: BlocProvider(
+        create: (context) => ProfileBloc(context.read<ProfileRepository>()),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          color: Colors.white,
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: AppBarTheme(color: Colors.white),
+          ),
 
-      home: const SplashScreen(),
+          home: const SplashScreen(),
+        ),
+      ),
     );
   }
 }
