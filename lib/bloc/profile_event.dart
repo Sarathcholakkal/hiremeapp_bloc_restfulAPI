@@ -9,14 +9,20 @@ final class ProfileFetched extends ProfileEvent {
   // ProfileFetched({required this.userId});
 }
 
-final class ProfilePostEvent extends ProfileEvent {
+final class ProfilePutEvent extends ProfileEvent {
   final Profile userprofile;
 
-  ProfilePostEvent({required this.userprofile});
+  ProfilePutEvent({required this.userprofile});
 }
 
 final class ProfileDeleteEvent extends ProfileEvent {
   final String id;
 
   ProfileDeleteEvent({required this.id});
+}
+
+final class ProfilePostEvent extends ProfileEvent {
+  final Profile usreprofile;
+
+  ProfilePostEvent({required this.usreprofile});
 }

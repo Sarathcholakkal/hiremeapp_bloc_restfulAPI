@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //!  random color generator funcitons
   @override
   void initState() {
     context.read<ProfileBloc>().add(ProfileFetched());
@@ -53,6 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is! ProfileSuccess) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
+
+          if (state is ProfileEmpty)
+            return const Center(
+              child: Text('no data found need to add new data'),
+            );
 
           final data = state.profile;
           return Center(

@@ -5,7 +5,8 @@ import 'package:hireme_app/data/data_provider/profile_data_provider.dart';
 import 'package:hireme_app/data/repository/profile_data_repository.dart';
 import 'package:hireme_app/presentations/screens/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

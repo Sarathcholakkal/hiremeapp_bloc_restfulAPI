@@ -73,7 +73,7 @@ class _UpdateEntryState extends State<UpdateEntry> {
       ),
     );
 
-    context.read<ProfileBloc>().add(ProfilePostEvent(userprofile: userprofile));
+    context.read<ProfileBloc>().add(ProfilePutEvent(userprofile: userprofile));
 
     log('profile updated');
     Navigator.of(context).pop();
@@ -113,7 +113,7 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Name',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(fieldName: 'name').call,
                           ),
 
                           TextFieldTitle(title: "Profession"),
@@ -125,7 +125,9 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Profession',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'profession',
+                            ).call,
                           ),
                           TextFieldTitle(title: "Profile Desctiption"),
                           TextFormField(
@@ -135,10 +137,13 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             controller: _professiondescripiton,
                             minLines: 4,
                             maxLines: 5,
+
                             decoration: texfieldDecoration.copyWith(
-                              hintText: 'Enter Profession',
+                              hintText: 'Enter Profession Description',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'Description',
+                            ).call,
                           ),
 
                           TextFieldTitle(title: "Qualifications"),
@@ -150,7 +155,9 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Educational Qualification',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'quealification',
+                            ).call,
                           ),
                           TextFieldTitle(title: "Experience"),
                           TextFormField(

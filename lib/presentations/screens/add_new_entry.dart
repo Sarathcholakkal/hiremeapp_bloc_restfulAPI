@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/widgets/text_field_title.dart';
 import 'package:hireme_app/utils/const.dart';
@@ -50,10 +52,17 @@ class _AddNewEntryState extends State<AddNewEntry> {
       ),
     );
 
-    // context.read<ProfileBloc>().add(ProfilePostEvent(userprofile: userprofile));
+    // context.read<ProfileBloc>().add(ProfilePostEvent(usreprofile: userprofile));
 
-    log('profile updated');
+    log('profile created');
     Navigator.of(context).pop();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    context.read<ProfileBloc>().add(ProfileFetched());
+    super.dispose();
   }
 
   @override
@@ -90,7 +99,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Name',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(fieldName: 'Name').call,
                           ),
 
                           TextFieldTitle(title: "Profession"),
@@ -102,20 +111,24 @@ class _AddNewEntryState extends State<AddNewEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Profession',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'profession',
+                            ).call,
                           ),
                           TextFieldTitle(title: "Profile Desctiption"),
                           TextFormField(
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.text,
-                            controller: _professionController,
+                            controller: _descriptionController,
                             minLines: 4,
                             maxLines: 5,
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Profession',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'profession',
+                            ).call,
                           ),
 
                           TextFieldTitle(title: "Qualifications"),
@@ -127,7 +140,9 @@ class _AddNewEntryState extends State<AddNewEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Educational Qualification',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'Qualification',
+                            ).call,
                           ),
                           TextFieldTitle(title: "Experience"),
                           TextFormField(
@@ -138,7 +153,9 @@ class _AddNewEntryState extends State<AddNewEntry> {
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Experience in Year',
                             ),
-                            validator: TextValidator(fieldName: 'CGPA').call,
+                            validator: TextValidator(
+                              fieldName: 'experience',
+                            ).call,
                           ),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -156,7 +173,14 @@ class _AddNewEntryState extends State<AddNewEntry> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (_signInKey.currentState!.validate()) {
+                                  debugPrint('form validated');
+                                  onSubmit(context);
+                                } else {
+                                  debugPrint("form not validated");
+                                }
+                              },
                               child: const Text(
                                 "Submit",
                                 style: TextStyle(fontSize: 15),

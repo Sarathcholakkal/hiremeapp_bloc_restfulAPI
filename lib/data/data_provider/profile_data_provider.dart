@@ -1,12 +1,13 @@
+import 'package:hireme_app/utils/shared_pref_helper.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileDataProvider {
   Future<String> gerProfielData() async {
+    final prefs = SharedPrefHelper();
+    final key = await prefs.getString();
     try {
       final response = await http.get(
-        Uri.parse(
-          "https://api.restful-api.dev/objects/ff8081819782e69e01987e3b131955bf",
-        ),
+        Uri.parse("https://api.restful-api.dev/objects/$key"),
       );
 
       if (response.statusCode != 200) {
@@ -19,3 +20,5 @@ class ProfileDataProvider {
     }
   }
 }
+
+//ff8081819782e69e01987fdddc945d8f

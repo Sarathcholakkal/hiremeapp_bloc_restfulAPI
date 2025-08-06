@@ -21,9 +21,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileSuccess(profile: profileData));
       } catch (e) {
         emit(ProfileFauilure(error: e.toString()));
+        // emit(ProfileEmpty());
       }
     });
-    on<ProfilePostEvent>((event, emit) async {
+    on<ProfilePutEvent>((event, emit) async {
       emit(ProfileLoading());
       try {
         await profilerepository.updateData(event.userprofile);
@@ -36,20 +37,31 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
     //==============
     on<ProfileDeleteEvent>((event, emit) async {
-      emit(ProfileLoading());
       try {
         await profilerepository.deleteData(event.id);
         emit(
-          ProfileInitial(),
+          ProfileEmpty(),
         ); // Or a ProfileDeleted state, if you want to show confirmation
       } catch (e) {
         emit(ProfileFauilure(error: e.toString()));
       }
     });
+    //====================
+    on<ProfilePostEvent>((event, emit) async {
+      emit(ProfileLoading());
+      try {
+        await profilerepository.insertData(event.usreprofile);
+
+        // emit(
+        //   ProfileSuccess(profile: event.usreprofile),
+        // ); // You can customize this
+      } catch (e) {
+        // emit(ProfileFauilure(error: e.toString()));
+      }
+    });
   }
 }
 
-post({required Profile userprofile}) {}
 
 
 

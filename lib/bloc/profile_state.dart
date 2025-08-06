@@ -18,3 +18,5 @@ final class ProfileFauilure extends ProfileState {
 }
 
 final class ProfileLoading extends ProfileState {}
+
+final class ProfileEmpty extends ProfileState {}

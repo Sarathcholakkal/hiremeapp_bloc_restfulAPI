@@ -41,4 +41,16 @@ class ProfileRepository {
       throw Exception('Failed to delete profile');
     }
   }
+
+  Future<void> insertData(Profile userprofile) async {
+    final response = await http.post(
+      Uri.parse("https://api.restful-api.dev/objects/"),
+      headers: {"Content-Type": "application/json"},
+      body: profileToJson(userprofile),
+    );
+
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      throw Exception("Failed to insert profile data");
+    }
+  }
 }
