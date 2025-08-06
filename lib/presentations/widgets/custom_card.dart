@@ -137,11 +137,7 @@ class CustomCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => UpdateEntry()),
-                    );
-                  },
+                  onPressed: () {},
                   child: const Text("Edit", style: TextStyle(fontSize: 12)),
                 ),
               ],

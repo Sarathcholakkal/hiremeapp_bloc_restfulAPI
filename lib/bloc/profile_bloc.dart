@@ -27,8 +27,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       post(userprofile: event.userprofile);
     });
   }
-
-  //................
 }
 
 post({required Profile userprofile}) {}

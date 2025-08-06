@@ -1,44 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/bloc/profile_bloc.dart';
+import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/widgets/text_field_title.dart';
 import 'package:hireme_app/utils/const.dart';
 import 'package:hireme_app/utils/text_validator.dart';
 
 class UpdateEntry extends StatefulWidget {
-  const UpdateEntry({super.key});
+  final Profile userprofile;
+  const UpdateEntry({required this.userprofile});
 
   @override
   State<UpdateEntry> createState() => _UpdateEntryState();
 }
 
 class _UpdateEntryState extends State<UpdateEntry> {
-  final _nameContorller = TextEditingController();
-  final _professionController = TextEditingController();
-
-  final _qualificationController = TextEditingController();
-  final _experienceController = TextEditingController();
-
   final GlobalKey<FormState> _signInKey = GlobalKey();
+
+  //! varible decleration
+  late TextEditingController _nameController;
+  late TextEditingController _professionController;
+  late TextEditingController _professiondescripiton;
+
+  late TextEditingController _qualificationController;
+  late TextEditingController _experienceController;
 
   // ! help to clear text field
 
   void clearField() {
-    _nameContorller.clear();
-
     _qualificationController.clear();
 
     _professionController.clear();
   }
   // ! onsubmitted fun for create instace of student using  input field
 
-  // Future<void> onSubmit(BuildContext ctx) async {
-  //   print('one submitte pressed');
-  //   final name = _nameContorller.text.trim();
-  //   final emialID = _emalilController.text.trim();
-  //   final subject = _subjectController.text.trim();
-  //   final number = _numberController.text.trim();
-  //   final cgpa = _professionController.text.trim();
+  @override
+  void initState() {
+    _nameController = TextEditingController(text: widget.userprofile.name);
+    _professionController = TextEditingController(
+      text: widget.userprofile.data.profession,
+    );
+    _professiondescripiton = TextEditingController(
+      text: widget.userprofile.data.profileDescription,
+    );
+    _qualificationController = TextEditingController(
+      text: widget.userprofile.data.qualification,
+    );
+    _experienceController = TextEditingController(
+      text: widget.userprofile.data.experience,
+    );
+    super.initState();
+  }
 
-  // }
+  Future<void> onSubmit(BuildContext ctx) async {
+    print('one submitte pressed');
+    final name = _nameController.text.trim();
+    final profession = _professionController.text.trim();
+    final descriptions = _professiondescripiton.text.trim();
+    final qulification = _qualificationController.text.trim();
+    final experinece = _experienceController.text.trim();
+
+    final userprofile = Profile(
+      id: widget.userprofile.id,
+      name: name,
+      data: Data(
+        profession: profession,
+        profileDescription: descriptions,
+        qualification: qulification,
+        experience: experinece,
+      ),
+    );
+
+    context.read<ProfileBloc>().add(ProfilePostEvent(userprofile: userprofile));
+
+    print('student updated');
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +107,7 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.text,
-                            controller: _professionController,
+                            controller: _nameController,
                             decoration: texfieldDecoration.copyWith(
                               hintText: 'Enter Name',
                             ),
@@ -93,7 +130,7 @@ class _UpdateEntryState extends State<UpdateEntry> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.text,
-                            controller: _professionController,
+                            controller: _professiondescripiton,
                             minLines: 4,
                             maxLines: 5,
                             decoration: texfieldDecoration.copyWith(
@@ -140,7 +177,14 @@ class _UpdateEntryState extends State<UpdateEntry> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (_signInKey.currentState!.validate()) {
+                                  debugPrint('form validated');
+                                  onSubmit(context);
+                                } else {
+                                  debugPrint("form not validated");
+                                }
+                              },
                               child: const Text(
                                 "Submit",
                                 style: TextStyle(fontSize: 15),
