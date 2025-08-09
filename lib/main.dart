@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hireme_app/bloc/profile_bloc.dart';
+import 'package:hireme_app/bloc/profile_observer.dart';
 import 'package:hireme_app/data/data_provider/profile_data_provider.dart';
 import 'package:hireme_app/data/repository/profile_data_repository.dart';
 import 'package:hireme_app/presentations/screens/splash_screen.dart';
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }

@@ -52,18 +52,18 @@ class _AddNewEntryState extends State<AddNewEntry> {
       ),
     );
 
-    // context.read<ProfileBloc>().add(ProfilePostEvent(usreprofile: userprofile));
+    context.read<ProfileBloc>().add(ProfilePostEvent(usreprofile: userprofile));
 
     log('profile created');
     Navigator.of(context).pop();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    context.read<ProfileBloc>().add(ProfileFetchEvent());
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   context.read<ProfileBloc>().add(ProfileFetchEvent());
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
