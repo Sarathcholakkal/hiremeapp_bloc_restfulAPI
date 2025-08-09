@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    context.read<ProfileBloc>().add(ProfileFetched());
+    context.read<ProfileBloc>().add(ProfileFetchEvent());
     super.initState();
   }
 
@@ -46,14 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
       // ),
       body: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
-          if (state is ProfileFauilure) {
+          if (state is ProfileFauilureState) {
             return Center(child: Text(state.error));
           }
-          if (state is! ProfileSuccess) {
+          if (state is! ProfileSucessState) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
 
-          if (state is ProfileEmpty)
+          if (state is ProfileEmptyState)
             return const Center(
               child: Text('no data found need to add new data'),
             );

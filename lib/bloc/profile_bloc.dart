@@ -10,29 +10,29 @@ part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profilerepository;
-  ProfileBloc(this.profilerepository) : super(ProfileInitial()) {
-    on<ProfileFetched>((event, emit) async {
-      emit(ProfileLoading());
+  ProfileBloc(this.profilerepository) : super(ProfileInitialState()) {
+    on<ProfileFetchEvent>((event, emit) async {
+      emit(ProfileLoadingState());
 
       try {
         print('try started to executes');
         final profileData = await profilerepository.getProfile();
         log(profileData.toString());
-        emit(ProfileSuccess(profile: profileData));
+        emit(ProfileSucessState(profile: profileData));
       } catch (e) {
-        emit(ProfileFauilure(error: e.toString()));
+        emit(ProfileFauilureState(error: e.toString()));
         // emit(ProfileEmpty());
       }
     });
     on<ProfilePutEvent>((event, emit) async {
-      emit(ProfileLoading());
+      emit(ProfileLoadingState());
       try {
         await profilerepository.updateData(event.userprofile);
         emit(
-          ProfileSuccess(profile: event.userprofile),
+          ProfileSucessState(profile: event.userprofile),
         ); // You can customize this
       } catch (e) {
-        emit(ProfileFauilure(error: e.toString()));
+        emit(ProfileFauilureState(error: e.toString()));
       }
     });
     //==============
@@ -40,15 +40,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         await profilerepository.deleteData(event.id);
         emit(
-          ProfileEmpty(),
+          ProfileEmptyState(),
         ); // Or a ProfileDeleted state, if you want to show confirmation
       } catch (e) {
-        emit(ProfileFauilure(error: e.toString()));
+        emit(ProfileFauilureState(error: e.toString()));
       }
     });
     //====================
     on<ProfilePostEvent>((event, emit) async {
-      emit(ProfileLoading());
+      emit(ProfileLoadingState());
       try {
         await profilerepository.insertData(event.usreprofile);
 

@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Uri.parse("https://api.restful-api.dev/objects"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
-        "name": "sarath ",
+        "name": "ssomehting ",
         "data": {
           "profession": "data sceintist",
           "Profile Description":

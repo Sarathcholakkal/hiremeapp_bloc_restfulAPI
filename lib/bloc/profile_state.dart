@@ -3,20 +3,20 @@ part of 'profile_bloc.dart';
 @immutable
 sealed class ProfileState {}
 
-final class ProfileInitial extends ProfileState {}
+final class ProfileInitialState extends ProfileState {}
 
-final class ProfileSuccess extends ProfileState {
+final class ProfileLoadingState extends ProfileState {}
+
+final class ProfileSucessState extends ProfileState {
   final Profile profile;
 
-  ProfileSuccess({required this.profile});
+  ProfileSucessState({required this.profile});
 }
 
-final class ProfileFauilure extends ProfileState {
+final class ProfileFauilureState extends ProfileState {
   final String error;
 
-  ProfileFauilure({required this.error});
+  ProfileFauilureState({required this.error});
 }
 
-final class ProfileLoading extends ProfileState {}
-
-final class ProfileEmpty extends ProfileState {}
+final class ProfileEmptyState extends ProfileState {}

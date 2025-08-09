@@ -61,7 +61,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
   @override
   void dispose() {
     // TODO: implement dispose
-    context.read<ProfileBloc>().add(ProfileFetched());
+    context.read<ProfileBloc>().add(ProfileFetchEvent());
     super.dispose();
   }
 
