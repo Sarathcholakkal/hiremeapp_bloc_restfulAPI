@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hireme_app/bloc/profile_bloc.dart';
+import 'package:hireme_app/profile_bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/presentations/widgets/text_field_title.dart';
 import 'package:hireme_app/utils/const.dart';

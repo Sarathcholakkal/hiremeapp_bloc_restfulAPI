@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, read, ReadContext;
-import 'package:hireme_app/bloc/profile_bloc.dart';
+import 'package:hireme_app/profile_bloc/profile_bloc.dart';
 import 'package:hireme_app/presentations/screens/add_new_entry.dart';
 import 'package:hireme_app/presentations/screens/update_entry.dart';
 import 'package:hireme_app/presentations/widgets/custom_app_bar.dart';
@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(

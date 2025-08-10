@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/theme_bloc/theme_bloc.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -20,6 +23,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
+      actions: [
+        BlocBuilder<ThemeBloc, ThemeData>(
+          builder: (context, state) {
+            return CupertinoSwitch(
+              value: state == ThemeData.dark(),
+              onChanged: (bool val) {
+                context.read<ThemeBloc>().add(ToggleThemeEvent());
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 
