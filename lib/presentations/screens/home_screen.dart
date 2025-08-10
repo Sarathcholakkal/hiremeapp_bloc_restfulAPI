@@ -58,19 +58,31 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           if (state is ProfileSucessState) {
-            final data = state.profile;
-            return Center(
-              child: GestureDetector(
-                onDoubleTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => UpdateEntry(userprofile: data),
-                    ),
-                  );
+            final datas = state.profile;
+            return SizedBox(
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                itemCount: datas.length,
+                itemBuilder: (context, index) {
+                  final data = datas[index];
+
+                  return CustomCard(profileData: data);
                 },
-                child: CustomCard(profileData: data),
               ),
             );
+
+            // Center(
+            //   child: GestureDetector(
+            //     onDoubleTap: () {
+            //       Navigator.of(context).push(
+            //         MaterialPageRoute(
+            //           builder: (context) => UpdateEntry(userprofile: data),
+            //         ),
+            //       );
+            //     },
+            //     child: CustomCard(profileData: data),
+            //   ),
+            // );
           }
           return const SizedBox.shrink();
         },

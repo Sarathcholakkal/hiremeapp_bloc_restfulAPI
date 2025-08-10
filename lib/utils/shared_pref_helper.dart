@@ -10,6 +10,37 @@ class SharedPrefHelper {
   SharedPrefHelper._internal();
   static const String datakey = 'key_token';
   static const String is_dark = 'is_dark';
+  static const String listKey = 'myListKey';
+
+  // ✅ Get the list
+  Future<List<String>> getStringList() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(listKey) ?? [];
+  }
+
+  // ✅ Remove a specific string and return the updated list
+  Future<List<String>> removeStringFromList(String valueToRemove) async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = prefs.getStringList(listKey) ?? [];
+
+    list.remove(valueToRemove);
+
+    await prefs.setStringList(listKey, list);
+    return list;
+  }
+
+  // ✅ Add a new string to the list
+  Future<List<String>> addStringToList(String newValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = prefs.getStringList(listKey) ?? [];
+
+    list.add(newValue);
+
+    await prefs.setStringList(listKey, list);
+    return list;
+  }
+
+  //! theme data managment------------------------------------------------
 
   Future<bool> isDark() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
@@ -60,15 +91,23 @@ class SharedPrefHelper {
     final prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(datakey);
   }
+}
 
-  Future<void> saveStringList(List<String> items) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('myListKey', items);
-  }
+
+
+
+
+
+
+
+
+ // Future<void> saveStringList(List<String> items) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setStringList('myListKey', items);
+  // }
 
   // Retrieve a list of strings
-  Future<List<String>?> getStringList() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('myListKey');
-  }
-}
+  // Future<List<String>?> getStringList() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   return prefs.getStringList('myListKey');
+  // }

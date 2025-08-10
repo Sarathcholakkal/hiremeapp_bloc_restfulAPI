@@ -13,8 +13,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this.profilerepository) : super(ProfileInitialState()) {
     on<ProfileFetchEvent>(_onFetchProfile);
     on<ProfilePostEvent>(_onPostProfile);
-    on<ProfilePutEvent>(_onPutProfile);
-    on<ProfileDeleteEvent>(_onDeleteProfile);
+    // on<ProfilePutEvent>(_onPutProfile);
+    // on<ProfileDeleteEvent>(_onDeleteProfile);
   }
 
   //..................on fetch data
@@ -25,8 +25,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoadingState());
 
     try {
-      final profileData = await profilerepository.getProfile();
-      emit(ProfileSucessState(profile: profileData));
+      final profilesData = await profilerepository.getProfiles();
+      emit(ProfileSucessState(profile: profilesData));
     } catch (e) {
       emit(ProfileFauilureState(error: e.toString()));
     }
@@ -40,7 +40,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoadingState());
     try {
       await profilerepository.postData(event.usreprofile);
-      final updatedData = await profilerepository.getProfile();
+      final updatedData = await profilerepository.getProfiles();
       emit(ProfileSucessState(profile: updatedData));
     } catch (e) {
       emit(ProfileFauilureState(error: e.toString()));
@@ -48,34 +48,34 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   //---------------on put data
-  Future<void> _onPutProfile(
-    ProfilePutEvent event,
-    Emitter<ProfileState> emit,
-  ) async {
-    emit(ProfileLoadingState());
-    try {
-      await profilerepository.putData(event.userprofile);
-      final updatedData = await profilerepository.getProfile();
-      emit(ProfileSucessState(profile: updatedData));
-    } catch (e) {
-      emit(ProfileFauilureState(error: e.toString()));
-    }
-  }
+  // Future<void> _onPutProfile(
+  //   ProfilePutEvent event,
+  //   Emitter<ProfileState> emit,
+  // ) async {
+  //   emit(ProfileLoadingState());
+  //   try {
+  //     await profilerepository.putData(event.userprofile);
+  //     final updatedData = await profilerepository.getProfile();
+  //     emit(ProfileSucessState(profile: updatedData));
+  //   } catch (e) {
+  //     emit(ProfileFauilureState(error: e.toString()));
+  //   }
+  // }
 
   //----------------delete event
-  Future<void> _onDeleteProfile(
-    ProfileDeleteEvent event,
-    Emitter<ProfileState> emit,
-  ) async {
-    emit(ProfileLoadingState());
-    try {
-      await profilerepository.deleteData(event.id);
-      print("✅ Delete API call completed successfully");
-      emit(ProfileEmptyState());
-    } catch (e) {
-      emit(ProfileFauilureState(error: e.toString()));
-    }
-  }
+  // Future<void> _onDeleteProfile(
+  //   ProfileDeleteEvent event,
+  //   Emitter<ProfileState> emit,
+  // ) async {
+  //   emit(ProfileLoadingState());
+  //   try {
+  //     await profilerepository.deleteData(event.id);
+  //     print("✅ Delete API call completed successfully");
+  //     emit(ProfileEmptyState());
+  //   } catch (e) {
+  //     emit(ProfileFauilureState(error: e.toString()));
+  //   }
+  // }
 }
 
 

@@ -8,7 +8,7 @@ final class ProfileInitialState extends ProfileState {}
 final class ProfileLoadingState extends ProfileState {}
 
 final class ProfileSucessState extends ProfileState {
-  final Profile profile;
+  final List<Profile> profile;
 
   ProfileSucessState({required this.profile});
 }

@@ -13,14 +13,31 @@ class ProfileRepository {
 
   ProfileRepository(this.profileDataProvider);
 
-  Future<Profile> getProfile() async {
-    try {
-      final rawProfileData = await profileDataProvider.gerProfielData();
-      return profileFromJson(rawProfileData);
-    } catch (e) {
-      throw 'Failed to fetch profile: $e';
+  Future<List<Profile>> getProfiles() async {
+    List<String> listofKeys = await SharedPrefHelper().getStringList();
+    List<Profile> profiles =[ ];
+
+    for (String key in listofKeys) {
+      try {
+        final rawProfileData = await profileDataProvider.gerProfielData(key);
+        Profile singleProfile = profileFromJson(rawProfileData);
+        profiles.add(singleProfile);
+      } catch (e) {
+        continue;
+        // throw 'Failed to fetch profile: $e';
+      }
     }
+    return profiles;
   }
+
+  // Future<Profile> getProfile() async {
+  //   try {
+  //     final rawProfileData = await profileDataProvider.gerProfielData();
+  //     return profileFromJson(rawProfileData);
+  //   } catch (e) {
+  //     throw 'Failed to fetch profile: $e';
+  //   }
+  // }
 
   Future<void> postData(Profile userprofile) async {
     final response = await http.post(
@@ -36,9 +53,11 @@ class ProfileRepository {
 
     final data = profileFromJson(response.body);
     final prefs = SharedPrefHelper();
-    await prefs.putString(data.id!);
-    final newkey = await prefs.getString();
-    log('this post new  key:$newkey');
+    await prefs.addStringToList(data.id!);
+
+    // await prefs.putString(data.id!);
+    // final newkey = await prefs.getString();
+    // log('this post new  key:$newkey');
   }
 
   //..................
