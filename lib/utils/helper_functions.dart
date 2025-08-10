@@ -11,9 +11,9 @@ final class HelperFunctions {
     final Random random = Random();
     return Color.fromARGB(
       255,
-      random.nextInt(76) + 180,
-      random.nextInt(76) + 180,
-      random.nextInt(76) + 180,
+      random.nextInt(36) + 220,
+      random.nextInt(36) + 220,
+      random.nextInt(36) + 220,
     );
   }
 

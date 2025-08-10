@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,34 +5,22 @@ import 'package:hireme_app/presentations/screens/update_entry.dart';
 import 'package:hireme_app/profile_bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/utils/const.dart';
-import 'package:hireme_app/utils/screen_size.dart';
+import 'package:hireme_app/utils/helper_functions.dart';
 import 'dart:developer' as check;
 
 class CustomCard extends StatelessWidget {
   final Profile profileData;
   const CustomCard({super.key, required this.profileData});
 
-  Color _generateLightRandomColor() {
-    final Random random = Random();
-    return Color.fromARGB(
-      255,
-      random.nextInt(76) + 180,
-      random.nextInt(76) + 180,
-      random.nextInt(76) + 180,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 20),
-      color: _generateLightRandomColor(),
+      color: HelperFunctions.generateLightRandomColor(),
       elevation: 30,
       shadowColor: Colors.grey,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
-        height: SizeConfig.screenHeight * .33,
-        width: SizeConfig.screenWidth * .75,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,6 +35,8 @@ class CustomCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                     letterSpacing: 1.5,
+                    color: Colors.black,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Spacer(),
@@ -83,7 +71,7 @@ class CustomCard extends StatelessWidget {
                       },
                     );
                   },
-                  icon: Icon(Icons.delete),
+                  icon: Icon(Icons.delete, color: Colors.red),
                 ),
               ],
             ),
@@ -94,20 +82,18 @@ class CustomCard extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 fontSize: 16,
                 letterSpacing: 1.2,
+                color: Colors.black,
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 4),
-              width: double.infinity,
-              height: SizeConfig.screenHeight * .12,
-              // color: Colors.red,
-              child: AutoSizeText(
-                profileData.data.profileDescription,
-                maxLines: 4,
-                minFontSize: 14,
-                maxFontSize: 18,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.w400),
+            AutoSizeText(
+              profileData.data.profileDescription,
+              maxLines: 2,
+              minFontSize: 14,
+              maxFontSize: 18,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
               ),
             ),
             Row(

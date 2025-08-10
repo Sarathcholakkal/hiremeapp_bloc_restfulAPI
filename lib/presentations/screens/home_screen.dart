@@ -58,6 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           if (state is ProfileSucessState) {
+            if (state.profile.isEmpty) {
+              return Center(child: Text('Add new Profiles'));
+            }
             final datas = state.profile;
             return SizedBox(
               child: ListView.builder(
