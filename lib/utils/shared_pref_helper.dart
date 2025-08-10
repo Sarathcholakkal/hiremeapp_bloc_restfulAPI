@@ -9,6 +9,18 @@ class SharedPrefHelper {
 
   SharedPrefHelper._internal();
   static const String datakey = 'key_token';
+  static const String is_Dark = 'is_dark';
+
+  Future<bool> isDark() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+
+    return pref.getBool(is_Dark) ?? false;
+  }
+
+  Future<void> setTheme(bool isDark) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool(is_Dark, isDark);
+  }
 
   /// Save or update a string value
   Future<void> putString(String value) async {
