@@ -7,6 +7,7 @@ import 'package:hireme_app/bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/utils/const.dart';
 import 'package:hireme_app/utils/screen_size.dart';
+import 'dart:developer' as check;
 
 class CustomCard extends StatelessWidget {
   final Profile profileData;
@@ -68,6 +69,7 @@ class CustomCard extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
+                                check.log(profileData.id!);
                                 context.read<ProfileBloc>().add(
                                   ProfileDeleteEvent(id: profileData.id!),
                                 );

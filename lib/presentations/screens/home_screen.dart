@@ -49,28 +49,31 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is ProfileFauilureState) {
             return Center(child: Text(state.error));
           }
-          if (state is! ProfileSucessState) {
-            return const Center(child: CircularProgressIndicator.adaptive());
-          }
-
-          if (state is ProfileEmptyState)
+          if (state is ProfileEmptyState) {
             return const Center(
               child: Text('no data found need to add new data'),
             );
+          }
+          if (state is ProfileLoadingState) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          }
 
-          final data = state.profile;
-          return Center(
-            child: GestureDetector(
-              onDoubleTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => UpdateEntry(userprofile: data),
-                  ),
-                );
-              },
-              child: CustomCard(profileData: data),
-            ),
-          );
+          if (state is ProfileSucessState) {
+            final data = state.profile;
+            return Center(
+              child: GestureDetector(
+                onDoubleTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => UpdateEntry(userprofile: data),
+                    ),
+                  );
+                },
+                child: CustomCard(profileData: data),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
         },
       ),
     );

@@ -62,9 +62,11 @@ class ProfileRepository {
       headers: {"Content-Type": "application/json"},
     );
 
-    if (response.statusCode != 200) {
-      throw Exception('Failed to delete profile');
-    }
+    log(' after delte status code${response.statusCode}');
+
+    // if (response.statusCode != 200) {
+    //   throw Exception('Failed to delete profile');
+    // }
   }
 }
 
