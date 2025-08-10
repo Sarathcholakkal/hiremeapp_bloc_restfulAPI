@@ -13,6 +13,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this.profilerepository) : super(ProfileInitialState()) {
     on<ProfileFetchEvent>(_onFetchProfile);
     on<ProfilePostEvent>(_onPostProfile);
+    on<ProfilePutEvent>(_onPutProfile);
   }
 
   //..................on fetch data
@@ -38,6 +39,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoadingState());
     try {
       await profilerepository.postData(event.usreprofile);
+      final updatedData = await profilerepository.getProfile();
+      emit(ProfileSucessState(profile: updatedData));
+    } catch (e) {
+      emit(ProfileFauilureState(error: e.toString()));
+    }
+  }
+
+  //---------------on put data
+  Future<void> _onPutProfile(
+    ProfilePutEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(ProfileLoadingState());
+    try {
+      await profilerepository.putData(event.userprofile);
       final updatedData = await profilerepository.getProfile();
       emit(ProfileSucessState(profile: updatedData));
     } catch (e) {

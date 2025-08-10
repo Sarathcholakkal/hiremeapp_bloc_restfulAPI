@@ -38,35 +38,22 @@ class ProfileRepository {
     final prefs = SharedPrefHelper();
     await prefs.putString(data.id!);
     final newkey = await prefs.getString();
-    log('this nehal key:$newkey');
+    log('this post new  key:$newkey');
   }
 
   //..................
 
-  //   Future<void> postData(Profile userprofile) async {
-  //     final response = await http.post(
-  //       Uri.parse("https://api.restful-api.dev/objects"),
-  //       headers: {"Content-Type": "application/json"},
-  //       body: jsonEncode({
-  //         "name": "nehala ",
-  //         "data": {
-  //           "profession": "machine learing",
-  //           "Profile Description":
-  //               "we are machine learners  learinging everything from past two year i no able to divdied anything yet",
-  //           "Qualification": "Hello",
-  //           "Experience": "3 year",
-  //         },
-  //       }),
-  //     );
-  //     log(response.body.toString());
+  Future<void> putData(Profile userprofile) async {
+    final response = await http.put(
+      Uri.parse("https://api.restful-api.dev/objects/${userprofile.id}"),
+      headers: {"Content-Type": "application/json"},
+      body: profileToJson(userprofile),
+    );
 
-  //     final data = profileFromJson(response.body);
-  //     final prefs = SharedPrefHelper();
-  //     await prefs.putString(data.id!);
-  //     final newkey = await prefs.getString();
-  //     log('this nehal key:$newkey');
-  //   }
-  // }
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      throw Exception("Failed to insert profile data");
+    }
+  }
 
   // profile_repository.dart
   Future<void> deleteData(String id) async {
