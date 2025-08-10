@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hireme_app/presentations/screens/update_entry.dart';
 import 'package:hireme_app/profile_bloc/profile_bloc.dart';
 import 'package:hireme_app/model/model.dart';
 import 'package:hireme_app/utils/const.dart';
@@ -171,7 +172,15 @@ class CustomCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // edit data despantyh
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            UpdateEntry(userprofile: profileData),
+                      ),
+                    );
+                  },
                   child: const Text("Edit", style: TextStyle(fontSize: 12)),
                 ),
               ],
