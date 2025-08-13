@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hireme_app/profile_bloc/profile_bloc.dart';
@@ -55,7 +53,6 @@ class _UpdateEntryState extends State<UpdateEntry> {
   }
 
   Future<void> onSubmit(BuildContext ctx) async {
-    print('one submitte pressed');
     final name = _nameController.text.trim();
     final profession = _professionController.text.trim();
     final descriptions = _professiondescripiton.text.trim();
@@ -75,7 +72,6 @@ class _UpdateEntryState extends State<UpdateEntry> {
 
     context.read<ProfileBloc>().add(ProfilePutEvent(userprofile: userprofile));
 
-    log('profile updated');
     Navigator.of(context).pop();
   }
 

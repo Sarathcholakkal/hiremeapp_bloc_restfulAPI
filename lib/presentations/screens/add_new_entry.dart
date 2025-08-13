@@ -35,7 +35,6 @@ class _AddNewEntryState extends State<AddNewEntry> {
   // ! onsubmitted fun for create instace of student using  input field
 
   Future<void> onSubmit(BuildContext ctx) async {
-    print('one submitte pressed');
     final name = _nameContorller.text.trim();
     final profession = _professionController.text.trim();
     final descriptions = _descriptionController.text.trim();
@@ -57,13 +56,6 @@ class _AddNewEntryState extends State<AddNewEntry> {
     log('profile created');
     Navigator.of(context).pop();
   }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   context.read<ProfileBloc>().add(ProfileFetchEvent());
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {

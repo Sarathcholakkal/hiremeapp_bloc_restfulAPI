@@ -1,4 +1,3 @@
-import 'package:hireme_app/utils/shared_pref_helper.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileDataProvider {
@@ -18,5 +17,3 @@ class ProfileDataProvider {
     }
   }
 }
-
-//ff8081819782e69e01987fdddc945d8f

@@ -3,11 +3,7 @@ part of 'profile_bloc.dart';
 @immutable
 sealed class ProfileEvent {}
 
-final class ProfileFetchEvent extends ProfileEvent {
-  // final String userId;
-
-  // ProfileFetched({required this.userId});
-}
+final class ProfileFetchEvent extends ProfileEvent {}
 
 final class ProfilePostEvent extends ProfileEvent {
   final Profile usreprofile;

@@ -13,6 +13,6 @@ class TextValidator {
       return '$fieldName must be at least 3 characters';
     }
 
-    return null; // valid
+    return null;
   }
 }
